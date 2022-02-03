@@ -8,52 +8,34 @@ This project uses k-mean clustering to clusters credit card users into different
 * **Kaggle data:** https://www.kaggle.com/arjunbhasin2013/ccdata
 ## About the data
 The data contain the follwing columns
-* House Listing Titles
-* House Listing Descriptions
-* Addresses
-* Areas in Square Yard
-* Number of Bedrooms
-* Number of Bathrooms
-* Prices
-* Listing Dates
-* Status (New or Second Hand)
-## Data Cleaning
-After scraping the data. I needed to clean it up so that it was usable for our model. I made the followinng changes and created the following variables:
-* Parsed numeric data out of prices
-* Made columns for subdistricts, districts, and provinces
-* Removed rows without bedrooms or bathrooms
-* Transformed listing datas or numerical value
-* Made columns for it different keywords were listed in the descriptions:
-  * school
-  * univeristy
-  * airport
-  * city
-  * housing estate
-  * view
-* Made a columns for titles and descriptions lengths
+* CUSTID : Identification of Credit Card holder (Categorical)
+* BALANCE : Total amount of money that you owe to your credit card company
+* BALANCEFREQUENCY : How frequently the Balance is updated, score between 0 and 1 (1 = frequently updated, 0 = not frequently updated)
+* PURCHASES : Amount of purchases made from account
+* ONEOFFPURCHASES : Maximum purchase amount done in one-go
+* INSTALLMENTSPURCHASES : Amount of purchase done in installment
+* CASHADVANCE : Cash in advance given by the user
+* PURCHASESFREQUENCY : How frequently the Purchases are being made, score between 0 and 1 (1 = frequently purchased, 0 = not frequently purchased)
+* ONEOFFPURCHASESFREQUENCY : How frequently Purchases are happening in one-go (1 = frequently purchased, 0 = not frequently purchased)
+* PURCHASESINSTALLMENTSFREQUENCY : How frequently purchases in installments are being done (1 = frequently done, 0 = not frequently done)
+* CASHADVANCEFREQUENCY : How frequently the cash in advance being paid
+* CASHADVANCETRX : Number of Transactions made with "Cash in Advanced"
+* PURCHASESTRX : Numbe of purchase transactions made
+* CREDITLIMIT : Limit of Credit Card for user
+* PAYMENTS : Amount of Payment done by user
+* MINIMUM_PAYMENTS : Minimum amount of payments made by user
+* PRCFULLPAYMENT : Percent of full payment paid by user
+* TENURE : Tenure of credit card service for user
+* 
 ## EDA
-I looked at the distributions of the data and the value counts for the various categorical variables. Below are a few highlights from the pivot tables.
+I looked at the distributions of the data. Below are a few highlights from the pivot tables.
 
 ![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/sactter_plot.png)
 ![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/heat_plot.png)
 ![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/box_plot.png)
 ![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/bar_plot.png)
 ## Model Building
-First I transformed the categorical variables into dummy variables. I also split the data into train and test sets with a test size of 33%
-I tired three different models and evaluated them using Mean Absolute Error. I chose MAE because it is relatively easy to interpret and outliers aren't particularly bad in for this type of model.
-I tried three different models:
-* **Multiple Linear Regression** - Baseline for the model
-* **Lasso Regression** - Because of the sparse data from the many categorical variables. I thought a normalized regression like lasso would be effective
-* **Random Forest** - Again, with the sparsity associated with the data, I thought that this would be a good fit
+First I delete the rows with missing data from the dataset. These rows only make up a very small amount of data compare to the whole dataset and thus could be deleted safely. I then scaled the data using Standard Scaler from sklearn library. This is done so that the variables are bing processed with the same weight. This is a necessary step with working with distance based algorithm such as k-mean clustering. I then optimized the model using the elbow method the find the optimal number of clusters
+
 ## Model Performance
-The Random Forest model outperformed the other approaches on the test and validation sets
-* **Random Forest:** MAE = 4411561.95
-* **Linear Regression:** MAE = 441239550501459.25
-* **Lasso Regression:** MAE = 6423036.02
-## Productization
-In this step, I built a flask API endpoint that was hosted on a local webserver by following along with the TDS tutorial in the reference section above. The API endpoint takes in a request with a list of values for a house listing and return an estimated price.
-
-
-
-
-
+I found that the optimal number of clusters in this dataset is 4. Below is the visual representation of how the data would clustered for each variables.
