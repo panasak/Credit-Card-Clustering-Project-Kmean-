@@ -30,12 +30,13 @@ The data contain the follwing columns
 ## EDA
 I looked at the distributions of the data. Below are a few highlights from the pivot tables.
 
-![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/sactter_plot.png)
-![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/heat_plot.png)
-![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/box_plot.png)
-![alt text](https://github.com/Panasak/Thailand_House_Prices_Predictor/blob/main/data_clean/bar_plot.png)
+![alt text](https://github.com/panasak/credit-card-clustering-project/blob/main/all_dist.png)
+![alt text](https://github.com/panasak/credit-card-clustering-project/blob/main/creditlimie_scatter.png)
+![alt text](https://github.com/panasak/credit-card-clustering-project/blob/main/violin_frequency.png)
+
 ## Model Building
 First I delete the rows with missing data from the dataset. These rows only make up a very small amount of data compare to the whole dataset and thus could be deleted safely. I then scaled the data using Standard Scaler from sklearn library. This is done so that the variables are bing processed with the same weight. This is a necessary step with working with distance based algorithm such as k-mean clustering. I then optimized the model using the elbow method the find the optimal number of clusters
 
 ## Model Performance
 I found that the optimal number of clusters in this dataset is 4. Below is the visual representation of how the data would clustered for each variables.
+![alt text](https://github.com/panasak/credit-card-clustering-project/blob/main/clusters.png)
